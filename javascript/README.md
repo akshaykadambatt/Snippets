@@ -109,9 +109,15 @@ if (document.querySelector(".box").classList.contains("focus")) {
 }
 ```
 
-### 
+### Array Map
 ```js
-
+array = document.querySelector('#parent).children')
+//array is an HTMLCollection, i.e. [Node,Node,Node,Node]
+array.map(fun)
+function fun(item){
+    return item.dataset.id
+}
+//now array is [1,2,3,4]
 ```
 
 ### 
