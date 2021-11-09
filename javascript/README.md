@@ -1,6 +1,6 @@
 ## Select items
 
-```
+```js
 // with jQuery
 // Hide all instances of .box
 $(".box").hide();// Without jQuery
