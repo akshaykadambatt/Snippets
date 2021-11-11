@@ -13,7 +13,7 @@ Check if the item is first or last in the collection.
     <p>This is user {{ $user->id }}</p>
 @endforeach
 ```
-
+#### Other $loop stuff
 | Property      | Description |
 | ----------- | ----------- |
 | $loop->index      | The index of the current loop iteration (starts at 0).       |
@@ -39,12 +39,36 @@ Check if the item is first or last in the collection.
 $archived = $request->boolean('archived'); 
 ```
 
-### 
+### File storage
 ```php
+Route::post('process', function (Request $request) {
+    $path = $request->file('photo')->store('photos'); //Or $request->photo->store('images')
+    dd($path); // photos/3hcX8yrOs2NYhpadt4Eacq4TFtpVYUCw6VTRJhfn.png
 
+    $photo = $request->file('photo');
+    $filename = 'profile-photo-' . $request->id . '.' . $file->getClientOriginalExtension(); //Or $request->photo->extension()
+    $path = $photo->storeAs('photos', $filename);
+    dd($path); // photos/profile-photo-100.png
+
+    //Or Multiple files
+    // $paths  = [];
+    // foreach ($photos as $photo) {
+    //     $extension = $photo->getClientOriginalExtension();
+    //     $filename  = 'profile-photo-' . time() . '.' . $extension;
+    //     $paths[]   = $photo->storeAs('photos', $filename);
+    // }
+    //
+    // dd($paths); //array:2 ["photos/profile-photo-1517315875.gif","photos/profile-photo-1517315875.png"]
+});
 ```
 
-### 
+#### Retriving files
 ```php
+$filename = User::where('id', Auth::user()->id())->firstOrFail('filename');
+$filename = 'profile-photo-' . Auth::user()->id() . '.jpg';
+$path = Storage::path('photos/' . $filename);
 
+if(Storage::exists($path)){
+        return Response::download($path, $filename);
+}
 ```
