@@ -1,5 +1,6 @@
 # Snippets
 
 [js](javascript/README.md)  
-[php](javascript/README.md)  
+[php](php/README.md)  
+[laravel](php/Laravel.md)  
 [css](javascript/README.md)  
