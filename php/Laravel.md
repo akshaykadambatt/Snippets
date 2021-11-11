@@ -30,4 +30,21 @@ Check if the item is first or last in the collection.
 ### Comments
 ```php
 {{-- This comment will not be present in the rendered HTML --}}
+```
+
+### Requests 
+#### Retrieving Boolean Input Values
 ```php
+//returns true for 1, "1", true, "true", "on", and "yes". All other values will return false:
+$archived = $request->boolean('archived'); 
+```
+
+### 
+```php
+
+```
+
+### 
+```php
+
+```
