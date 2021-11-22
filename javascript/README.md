@@ -120,7 +120,13 @@ function fun(item){
 //now array is [1,2,3,4]
 ```
 
-### 
+### Check if any of the parents of a node has a class/id/tag (Good when events' bubbling)
 ```js
-
+function hasParentWithMatchingSelector (target:Node, selector:string) {
+    const allSubMenus : NodeListOf<Element> = document.querySelectorAll(selector) 
+    let myArray = Array.from(allSubMenus)
+    return [...myArray].some(el =>
+      el !== target && el.contains(target)
+    )
+  }
 ```
