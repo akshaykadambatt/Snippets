@@ -1,12 +1,14 @@
 ### Set state
 #### if calling only once
+
 ```js
 method() {
     this.setState({
         count: this.state.count + 1
     }, () => console.log('this is the callback.', this.state.count))
 }
-```
+ ```
+
 #### if calling multiple times
 ```js
 method() {
