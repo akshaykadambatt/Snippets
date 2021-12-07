@@ -72,3 +72,17 @@ if(Storage::exists($path)){
         return Response::download($path, $filename);
 }
 ```
+
+### Eloquent
+```php
+//Set the entry, i.e. update existing entry OR create then update that entry
+public function setDashboardConfigs($vars)
+{ 
+    $entry = DashboardSetting::firstOrNew(
+        ['role_id' => $vars['id']] //Retrive if role_id=num exist or instantiate a new DashboardSetting instance
+    );
+    $entry->dashboard_items = json_encode($vars['items']);
+    $entry->save();
+    return response()->json($entry->toArray());
+}
+```
