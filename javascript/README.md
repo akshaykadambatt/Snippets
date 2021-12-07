@@ -6,6 +6,11 @@
 $(".box").hide();// Without jQuery
 // Iterate over the nodelist of elements to hide all instances of .box
 document.querySelectorAll(".box").forEach(box => { box.style.display = "none" })
+//OR
+//Get HTMLCollection, spread it, put it in an array, give it to forEach
+[...document.querySelectorAll('.js-switch')].forEach(div=>{
+    new Switchery(div)
+})
 ```
 
 ### Traversing the tree with parent(), next(), and prev()
@@ -129,4 +134,34 @@ function hasParentWithMatchingSelector (target:Node, selector:string) {
       el !== target && el.contains(target)
     )
   }
+```
+
+### Fetch examples
+```js
+//GET with params
+fetch(
+    '/getDashboardConfigs?' + new URLSearchParams({ //Append params to URL for GET
+          val: e.currentTarget.value
+    }), {
+    method: "GET",
+    headers: { 'Content-type': 'application/json', 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+  })
+  .then(res => res.json())
+  .then(res => {
+      console.log(res);
+  });
+
+//POST fetch with body
+fetch('/setDashboardConfigs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    body: JSON.stringify(sendData) //OR spread new FormData(document.querySelector('#formOne'))
+})
+  .then(response => response.json())
+  .then(data => {
+      console.log(data);
+  })
+  .catch(() => {
+      this.message = 'Failed.'
+  })
 ```
