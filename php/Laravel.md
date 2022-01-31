@@ -135,3 +135,10 @@ $output = Trekuser::select('trek_user_dob as dob')
     ->sortKeys()->toArray();
 
 ```
+
+### Carbon
+```php
+$date1 = Carbon::parse($trek_start_date);
+$date2 = Carbon::parse($trek_end_date);
+$sumOfDays += $date1->diffInDays($date2);
+```
