@@ -85,4 +85,53 @@ public function setDashboardConfigs($vars)
     $entry->save();
     return response()->json($entry->toArray());
 }
+
+//Sum of column values
+$data = CookRating::select('CookID')
+    ->with('cook:cook_name,id')
+    ->whereDate('AddedDate', '>=', $date[0])
+    ->whereDate('AddedDate', '<=', $date[1])
+    ->where('Status', 0)->groupBy('CookID')
+    ->selectRaw('sum(NoOfBatch) as batches, sum(NoOfDays) as days, avg(Value) as rating')
+    ->has('cook')
+    ->get()
+    ->map(function ($item) {
+        return [
+            "name" => ($item->cook? $item->cook->cook_name:null),
+            "days" => $item->days,
+            "batches" => $item->batches,
+            "rating" => $item->rating + 0,
+        ];
+    });
+
+//Counts in ranges
+$ranges = [ // the start of each age-range.
+    '0-17' => 0,
+    '18-24' => 18,
+    '25-34' => 25,
+    '35-44' => 35,
+    '45-54' => 45,
+    '55-64' => 55,
+    '64+' => 64,
+];
+$output = Trekuser::select('trek_user_dob as dob')
+    ->get()
+    ->map(function ($user) use ($ranges) {
+        $age = Carbon::parse($user->dob)->age;
+        foreach ($ranges as $key => $breakpoint) {
+            if ($breakpoint >= $age) {
+                $user->range = $key;
+                break;
+            }
+        }
+        return $user;
+    })
+    ->mapToGroups(function ($user, $key) {
+        return [$user->range => $user];
+    })
+    ->map(function ($group) {
+        return count($group);
+    })
+    ->sortKeys()->toArray();
+
 ```
