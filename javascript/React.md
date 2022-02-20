@@ -140,6 +140,7 @@ const App = () => (
 
 # Blog
 ### How I created a logout route in a React / Firebase project
+Using React Router v6.2.1
 ```js
 import React, {useEffect} from 'react';
 import { useAuth } from '../contexts/AuthContext';
@@ -199,6 +200,7 @@ export default function ProtectedRoute(props){
 }
 ```
 ### How to create a protected route in React
+Using React Router v6.2.1
 ```js
 import ProtectedRoute from './components/ProtectedRoute';
 export default function App() {
@@ -236,5 +238,7 @@ export default function ProtectedRoute(props){
     }
 }
 ```
+This way /home is a protected route that can only be accessed if currentUser is not null.
+
 ```
 ```
