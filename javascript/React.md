@@ -198,9 +198,43 @@ export default function ProtectedRoute(props){
     }
 }
 ```
+### How to create a protected route in React
+```js
+import ProtectedRoute from './components/ProtectedRoute';
+export default function App() {
+  return (
+    <Routes>
+      <Route exact path='/home' element={<ProtectedRoute/>}>
+        <Route exact path='/home' element={
+          <React.Suspense fallback={<>...</>}>
+            <Dashboard />
+          </React.Suspense>
+        }/>
+      </Route>
+    <Routes>
+  );
+}
 ```
-```
-```
+The ProtectedRoute component;
+```js
+import React, { useContext } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import {Route, Navigate, Outlet} from 'react-router-dom';
+
+export default function ProtectedRoute(props){
+    const { currentUser } = useAuth()
+    if (currentUser){
+        if(currentUser==null){
+            return(<Navigate to={props.redirectTo}></Navigate>)
+        }
+        else{
+            return(<Outlet />)
+        }
+    }
+    else{
+        return null
+    }
+}
 ```
 ```
 ```
