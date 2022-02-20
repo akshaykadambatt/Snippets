@@ -137,10 +137,66 @@ const App = () => (
   </Router>
 );
 ```
+
+# Blog
+### How I created a logout route in a React / Firebase project
+```js
+import React, {useEffect} from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate, Navigate } from 'react-router-dom';
+
+export default function Logout(){
+    const { currentUser, logout } = useAuth()
+    const history = useNavigate()
+    async function handleLogout() {
+        try {
+        await logout()
+        history("/login")
+        } catch {
+        }
+    }
+    useEffect(() => {
+        handleLogout()
+    }, [])
+    
+    if(currentUser==null){
+        return(<Navigate to={'/'}></Navigate>)
+    }
+    else{
+        return(<></>)
+    }
+}
 ```
+How I called it
+```js
+<Route exact path='/logout' element={<ProtectedRoute/>}>
+    <Route exact path='/logout' element={
+      <React.Suspense fallback={<>...</>}>
+        <Logout />
+      </React.Suspense>
+    }/>
+</Route>
 ```
-```
-```
+Whats in ProtectedRoute?
+```js
+import React, { useContext } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import {Route, Navigate, Outlet} from 'react-router-dom';
+
+export default function ProtectedRoute(props){
+    const { currentUser } = useAuth()
+    if (currentUser){
+        if(currentUser==null){
+            return(<Navigate to={props.redirectTo}></Navigate>)
+        }
+        else{
+            return(<Outlet />)
+        }
+    }
+    else{
+        return null
+    }
+}
 ```
 ```
 ```
