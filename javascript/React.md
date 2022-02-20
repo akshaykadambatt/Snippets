@@ -240,7 +240,7 @@ export default function ProtectedRoute(props){
 ```
 This way /home is a protected route that can only be accessed if currentUser is not null.
 
-### React router v6
+### React router v6 Adding a route to a modal
 You'll have to use an Outlet in your nested component;
 ```js
     <BrowserRouter>
