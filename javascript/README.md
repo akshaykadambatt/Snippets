@@ -165,3 +165,13 @@ fetch('/setDashboardConfigs', {
       this.message = 'Failed.'
   })
 ```
+
+## Date
+### Date to timestamp
+```js
+let dataObject = new Date() //Sun Jul 10 2022 15:09:22 GMT+0530 (India Standard Time)
+let timestamp = + new Date() //1657445959799
+//OR
+let timestamp = Number(new Date()) //1657445959799
+// `+` is the Number() method operator
+```
