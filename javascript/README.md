@@ -1,15 +1,16 @@
 ### Select items
-
 ```js
 // with jQuery
 // Hide all instances of .box
-$(".box").hide();// Without jQuery
+$(".box").hide();
+
+// Without jQuery
 // Iterate over the nodelist of elements to hide all instances of .box
 document.querySelectorAll(".box").forEach(box => { box.style.display = "none" })
 //OR
 //Get HTMLCollection, spread it, put it in an array, give it to forEach
-[...document.querySelectorAll('.js-switch')].forEach(div=>{
-    new Switchery(div)
+[...document.querySelectorAll('.box')].forEach(div=>{
+    div.style.display = "none"
 })
 ```
 
@@ -32,14 +33,15 @@ box.parentElement;
 ### Working with events
 ```js
 // With jQuery
-$(".button").click(function(e) { /* handle click event */ });
-$(".button").mouseenter(function(e) {  /* handle click event */ });
-$(document).keyup(function(e) {  /* handle key up event */  });
+$(".button").click(function(e) { /* handle */ });
+$(".button").mouseenter(function(e) {  /* handle */ });
+$(document).keyup(function(e) {  /* handle */  });
 
 // Without jQuery
-document.querySelector(".button").addEventListener("click", (e) => { /* ... */ });
-document.querySelector(".button").addEventListener("mouseenter", (e) => { /* ... */ });
-document.addEventListener("keyup", (e) => { /* ... */ });
+document.querySelector(".button").addEventListener("click", (e) => { /* handle */ });
+document.querySelector(".button").addEventListener("mouseenter", (e) => { /* handle */ });
+document.addEventListener("keyup", (e) => { /* handle */ });
+document.querySelector(".button").onclick = function(e){ /* handle */ }
 ```
 
 ### Event listening for dynamically added elements
@@ -124,6 +126,11 @@ function fun(item){
 }
 //now array is [1,2,3,4]
 ```
+
+### Array Map
+![Array.map – map all values to an expression.](https://miro.medium.com/max/700/1*4EGwsCicbWJeml2aAm714A.gif)
+![Array.filter – keep all that match a condition.](https://miro.medium.com/max/700/1*TOPYVvfMBmjajPh-fqZ9GQ.gif)
+![Array.reduce – reduce all items to a single value.](https://miro.medium.com/max/700/1*dhTC_FFgiH3mKROrnDj12w.gif)
 
 ### Check if any of the parents of a node has a class/id/tag (Good when events' bubbling)
 ```js
