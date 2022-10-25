@@ -182,3 +182,19 @@ let timestamp = + new Date() //1657445959799
 let timestamp = Number(new Date()) //1657445959799
 // `+` is the Number() method operator
 ```
+
+## URL
+### GET params
+Get all URL GET parameters as a keyed object:
+```js
+let getParamsObject = ([...(new URLSearchParams(window.location.search))]).reduce((prev,curr)=>(
+    Object.assign(prev,{[curr[0]]:curr[1]})
+  ),{})
+/**
+ * getParamsObject = {
+ *  param: 1,
+ *  param2: "new",
+ * }
+ * */
+
+```
